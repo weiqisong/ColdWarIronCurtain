@@ -7,41 +7,27 @@ PRC_politics_categories = {
 	allowed = {
 	}
 	visible = {
-		always = no
-		#tag = PRC
+		tag = PRC
 		#has_global_flag = chinese_civil_war_over
 		#has_global_flag = ROC_taiwan
 	}
 	scripted_gui = pie_chart_example
 	visible_when_empty = yes
 }
-PRC_SOV_politics_categories = {
-
-	icon = GFX_PRC_politic_decision_2
-
-	picture = GFX_PRC_politic_decision_10
-	priority = 1000
-	allowed = {
-		always = no
-	}
-	visible = {
-		always = no
-		
-		NOT = {
-			has_global_flag = ROC_taiwan
-		}
-	}
-}
-PRC_universal_revolution = {
+PRC_technology_category = {
 	icon = generic_independence
 	
-	picture = "GFX_PRC_politic_decision_bg"
+	#picture = "GFX_PRC_politic_decision_bg"
 	priority = 20
 	allowed = {
 		#always = no
 	}
 	visible = {
-		
+		#always = no 
+		#tag = PRC
+		#has_global_flag = chinese_civil_war_over
+		#has_global_flag = ROC_taiwan
+		has_completed_focus = RPC_50s-March_on_science
 	}
 	visible_when_empty = no
 }

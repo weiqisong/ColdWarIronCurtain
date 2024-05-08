@@ -20,6 +20,7 @@ ic_pulse = {
 		}
 		set_variable = { global.eco_health = 0 }
 	}
+
 	set_variable = { global.eco_output_factor = 1 }
 	set_variable = { ecoalpha = global.eco_health }
 	multiply_variable = { ecoalpha = 10 }
@@ -43,185 +44,6 @@ ic_pulse = {
 	# every_owned_state = {
 		# state_infra_modifier_setup = yes
 	# }
-	if = {
-		limit = {
-			tag = SOV
-			has_idea = SOV_Discipline_strengthening_initiative
-			NOT = {
-				has_country_flag = disciplined_labor
-			}
-		}
-		set_country_flag = {
-			flag = disciplined_labor
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			LaborDiscipline = 0.5
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			OR = {
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved_again
-			}
-			NOT = {
-				has_country_flag = disciplined_labor_strength
-			}
-		}
-		set_country_flag = {
-			flag = disciplined_labor_strength
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			LaborDiscipline = 1
-		}
-	}
-	if = {
-		limit = {
-			tag = USA
-			date > 1953.4.1
-			date < 1954.4.1
-			has_global_flag = korean_war
-			OR = {
-				KPA = {
-					controls_province = 7125
-				}
-				KOR = {
-					controls_province = 4052
-				}
-			}
-			NOT = {
-				has_country_flag = timer_delay
-			}
-		}
-		add_days_mission_timeout = {
-			mission = Korean_War_Ceasefire
-			days = 150
-		}
-		set_country_flag = {
-			flag = timer_delay
-			days = 150
-			value = 1
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			OR = {
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved
-			}
-			has_country_flag = Decree_No_745
-			NOT = {
-				has_country_flag = disciplined_labor_decree745
-			}
-		}
-		set_country_flag = {
-			flag = disciplined_labor_decree745
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			LaborDiscipline = 0.5
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			OR = {
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved
-				has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved_again
-			}
-			has_country_flag = Decree_No_744
-			NOT = {
-				has_country_flag = disciplined_labor_decree744
-			}
-		}
-		set_country_flag = {
-			flag = disciplined_labor_decree744
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			LaborDiscipline = 0.5
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			has_idea = SOV_Campaign_on_Strengthening_Labour_Discipline_Improved_again
-			has_country_flag = Decree_No_744
-			NOT = {
-				has_country_flag = disciplined_labor_again
-			}
-		}
-		set_country_flag = {
-			flag = disciplined_labor_again
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			LaborDiscipline = 1
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			has_idea = SOV_Anti_corruption_campaign_in_MVD
-			NOT = {
-				has_country_flag = corruption_lowered_MVD
-			}
-		}
-		set_country_flag = {
-			flag = corruption_lowered_MVD
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			CorruptionLevel = -0.02
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			has_idea = SOV_Ongoing_mass_dismissals_in_the_Ministry_of_Internal_Affairs
-			NOT = {
-				has_country_flag = corruption_lowered_Internal_Affairs
-			}
-		}
-		set_country_flag = {
-			flag = corruption_lowered_Internal_Affairs
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			CorruptionLevel = -0.02
-		}
-	}
-	if = {
-		limit = {
-			tag = SOV
-			has_idea = SOV_Mass_reshuffles_and_dismissals_in_the_party_and_administrative_apparatus
-			NOT = {
-				has_country_flag = mass_reshuffles
-			}
-		}
-		set_country_flag = {
-			flag = mass_reshuffles
-			days = 30
-			value = 1
-		}
-		add_to_variable = {
-			CorruptionLevel = -0.02
-		}
-	}
 	if = {
 		limit = {
 			tag = VIE
@@ -263,9 +85,17 @@ ic_pulse = {
 		}
 		
 	}
+	if = {
+		limit = {
+			NOT = { has_global_flag = Twentieth_Congress_of_the_CPSU }
+			date > 1956.02.14 # Historical date
+			date < 1956.03.15
+		}
+		set_global_flag = Twentieth_Congress_of_the_CPSU
+	}
 	#Jinnah_President.6			Jinnah Death July 1967
 	#PAK_1965_Election.1		Historical 1965 Election Start October 1964
-	#Baluchistan_Uprising.100	Precursor of the Baloch Conflict Feb 1973
+	#Baluchistan_Uprising.100	Precursor of the Baloch Conflict Feb 1973	 	
 	if = {
 		limit = {
 			tag = PAK
@@ -293,7 +123,7 @@ ic_pulse = {
 			date > 1965.09.01
 			date < 1965.10.30
 			NOT = { has_country_flag = Pak_Election_65_AltHistorical }
-			has_country_flag = Democratic_Pakistan_1960s
+			has_country_flag = Democratic_Pakistan_1960s 
 		}
 		country_event = Dem_Ayub65.1
 		set_country_flag = Pak_Election_65_AltHistorical
@@ -351,7 +181,7 @@ ic_pulse = {
 			date > 1970.06.01
 			date < 1970.08.30
 			NOT = { has_country_flag = Pak_Election_70_AltHistorical_Start }
-			has_country_flag = Democratic_Pakistan_1960s
+			has_country_flag = Democratic_Pakistan_1960s 
 		}
 		set_country_flag = PAK_1970_Campaign
 		set_country_flag = Pak_Election_70_AltHistorical_Start
@@ -399,7 +229,7 @@ ic_pulse = {
 			date > 1970.09.01
 			date < 1970.10.30
 			NOT = { has_country_flag = Pak_Election_70_AltHistorical }
-			has_country_flag = Democratic_Pakistan_1960s
+			has_country_flag = Democratic_Pakistan_1960s 
 		}
 		country_event = DemRahman1970.0
 		set_country_flag = Pak_Election_70_AltHistorical
@@ -411,7 +241,7 @@ ic_pulse = {
 			date < 1975.08.30
 			NOT = { has_country_flag = Pak_Election_70_AltHistorical2 }
 			NOT = { has_country_flag = Zia_Alt_Coup }
-			has_country_flag = Democratic_Pakistan_1960s
+			has_country_flag = Democratic_Pakistan_1960s 
 		}
 		country_event = PAK_1975_Election.1
 		set_country_flag = Pak_Election_70_AltHistorical2
@@ -421,9 +251,9 @@ ic_pulse = {
 			tag = PAK
 			date > 1975.04.01
 			date < 1975.05.30
-			NOT = { has_country_flag = Pak_Election_70_AltHistorical2_Start }
+            NOT = { has_country_flag = Pak_Election_70_AltHistorical2_Start }
 			NOT = { has_country_flag = Zia_Alt_Coup }
-			has_country_flag = Democratic_Pakistan_1960s
+			has_country_flag = Democratic_Pakistan_1960s 
 		}
 		set_country_flag = PAK_1975_Campaign
 		set_country_flag = Pak_Election_70_AltHistorical2_Start
@@ -470,7 +300,7 @@ ic_pulse = {
 			date > 1977.01.01
 			date < 1977.02.28
 			NOT = { has_country_flag = Bhutto_1970s_Loaded_1977_Election_Started }
-			has_country_flag = Bhutto_1970s_Loaded
+			has_country_flag = Bhutto_1970s_Loaded 
 		}
 		set_country_flag = Bhutto_1970s_Loaded_1977_Election_Started
 		#472			#Northwest Territories
@@ -504,14 +334,14 @@ ic_pulse = {
 
 		set_country_flag = PAK_1977_Campaign
 		normalize_pakistan_election_information = yes
-	}
+	}	
 	if = {
 		limit = {
 			tag = PAK
 			date > 1977.03.01
-			date < 1977.04.30
+			date < 1977.1040.30
 			NOT = { has_country_flag = Bhutto_1970s_Loaded_1977_Election }
-			has_country_flag = Bhutto_1970s_Loaded
+			has_country_flag = Bhutto_1970s_Loaded 
 		}
 		country_event = PAK_1977_Elections.1
 		set_country_flag = Bhutto_1970s_Loaded_1977_Election
@@ -523,7 +353,7 @@ ic_pulse = {
 			date < 1975.10.30
 			NOT = { has_country_flag = Pak_Election_70_AltHistorical }
 			NOT = { has_country_flag = Zia_Alt_Coup }
-			has_country_flag = Democratic_Pakistan_1960s
+			has_country_flag = Democratic_Pakistan_1960s 
 		}
 		country_event = PAK_1975_Election.2
 		set_country_flag = Pak_Election_70_AltHistorical
@@ -535,11 +365,11 @@ ic_pulse = {
 			date < 1966.04.30
 			NOT = { has_country_flag = Operation_Grand_Slam }
 			NOT = { has_country_flag = PAK_MAAG_Two }
-			has_country_flag = Bhutto_1970s_Loaded
+			has_country_flag = Bhutto_1970s_Loaded 
 		}
 		country_event = PAK_MAAG.1
 		set_country_flag = PAK_MAAG_Two
-	}
+	}		
 	if = {
 		limit = {
 			tag = PAK
@@ -560,16 +390,24 @@ ic_pulse = {
 		country_event = PAK_Religous_Upheaval.1
 		set_country_flag = PAK_Religous_Upheaval_Loaded
 	}
+	
+	
 	if = {
 		limit = {
 			tag = PAK
 			date > 1967.07.01
 			date < 1967.08.30
 			NOT = { has_country_flag = Fatima_Jinnah_End }
-			has_country_leader = {
-				name = "Fatima Jinnah"
-				ruling_only = yes
-			}
+		}
+		country_event = Jinnah_President.6
+		set_country_flag = Fatima_Jinnah_End
+	}
+	if = {
+		limit = {
+			tag = PAK
+			date > 1967.07.01
+			date < 1967.08.30
+			NOT = { has_country_flag = Fatima_Jinnah_End }
 		}
 		country_event = Jinnah_President.6
 		set_country_flag = Fatima_Jinnah_End
@@ -790,8 +628,8 @@ ic_pulse = {
 	if = {
 		limit = {
 			tag = HOL
-			date > 1953.01.01
-			date < 1953.02.02
+			date > 1953.01.18
+			date < 1953.01.20
 		}
 		news_event = northseaflood.1
 	}
@@ -799,7 +637,7 @@ ic_pulse = {
 		limit = {
 			tag = BAN
 			date > 1973.03.01
-			date < 1973.04.30
+			date < 1958.05.30
 		}
 		country_event = FG_AL.0
 	}
@@ -917,7 +755,7 @@ ic_pulse = {
 		}
 		set_global_flag = Phase3
 		757 = {
-			add_dynamic_modifier = {
+		add_dynamic_modifier = {
 				modifier = unplanned_offensive
 			}
 		}
@@ -968,10 +806,10 @@ ic_pulse = {
 			remove_dynamic_modifier = { modifier = unplanned_offensive }
 		}
 		881 = {
-			remove_dynamic_modifier = { modifier = unplanned_offensive }
+			remove_dynamic_modifier = { modifier = unplanned_offensive } 
 		}
 		757 = {
-			remove_dynamic_modifier = { modifier = unplanned_offensive }
+			remove_dynamic_modifier = { modifier = unplanned_offensive } 
 		}
 		VIN = {
 			add_ai_strategy = {
@@ -1035,25 +873,25 @@ ic_pulse = {
 		}
 		1287 = {
 			create_unit = {
-				division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+				division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 				owner = NLF
 				allow_spawning_on_enemy_provs = yes
 			}
 			create_unit = {
-				division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+				division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 				owner = NLF
 				allow_spawning_on_enemy_provs = yes
 			}
 		}
 		983 = {
 			create_unit = {
-				division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+				division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 				owner = NLF
 				allow_spawning_on_enemy_provs = yes
 				prioritize_location = 13702
 			}
 			create_unit = {
-				division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+				division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 				owner = NLF
 				allow_spawning_on_enemy_provs = yes
 				prioritize_location = 13702
@@ -1072,13 +910,13 @@ ic_pulse = {
 		set_global_flag = Phase1
 			983 = {
 				create_unit = {
-					division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+					division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 					owner = NLF
 					allow_spawning_on_enemy_provs = yes
 					prioritize_location = 12133
 				}
 				create_unit = {
-					division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+					division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 					owner = NLF
 					allow_spawning_on_enemy_provs = yes
 					prioritize_location = 4341
@@ -1086,7 +924,7 @@ ic_pulse = {
 			}
 			1285 = {
 				create_unit = {
-					division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+					division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 					owner = NLF
 					allow_spawning_on_enemy_provs = yes
 					prioritize_location = 13708
@@ -1094,7 +932,7 @@ ic_pulse = {
 			}
 			286 = {
 				create_unit = {
-					division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+					division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 					owner = NLF
 					allow_spawning_on_enemy_provs = yes
 					prioritize_location = 13705
@@ -1102,7 +940,7 @@ ic_pulse = {
 			}
 			1289 = {
 				create_unit = {
-					division = "name = \"\" division_template = \"Viet Cong Su doàn\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
+					division = "name = \"\" division_template = \"Sư đoàn Việt Cộng\" start_experience_factor = 4.0 start_equipment_factor = 1.0"
 					owner = NLF
 					allow_spawning_on_enemy_provs = yes
 					prioritize_location = 13713
@@ -1439,45 +1277,6 @@ ic_pulse = {
 			has_global_flag = SOV_Beria_Struggle_1
 		}
 		country_event = SOV_Beria_Struggle.1
-	}
-	if = {
-		limit = {
-			tag = FIN
-			date > 1965.09.01
-			date < 1965.12.01
-		}
-		country_event = fin.39
-	}
-	if = {
-		limit = {
-			tag = NIC
-			date > 1954.02.01
-			date < 1954.04.01
-		}
-		country_event = nic.6
-	}
-	if = {
-		limit = {
-			tag = FIN
-			date > 1961.01.01
-			date < 1961.03.01
-		}
-		country_event = fin.40
-	}
-	if = {
-		limit = {
-			tag = FIN
-			date > 1962.08.01
-			date < 1962.09.01
-		}
-		country_event = fin.41
-	}
-	if = {
-		limit = {
-			tag = RAJ
-			date > 1975.06.01
-			date < 1975.08.01
-		}
 	}
 	if = {
 		limit = {
@@ -2069,29 +1868,6 @@ ic_pulse = {
 	if = {
 		limit = {
 				tag = SOV
-				has_completed_focus = SOV_Introduce_the_Fifth_Five_Years_Plan
-				NOT = {
-					has_completed_focus = SOV_Analyse_The_Results_Of_The_Fifth_Five_Years_Plan
-					has_completed_focus = SOV_Introduce_The_Sixth_Five_Years_Plan
-					has_idea = five_year_plan
-				}
-			}
-		complete_national_focus = SOV_Analyse_The_Results_Of_The_Fifth_Five_Years_Plan
-	}
-	if = {
-		limit = {
-				tag = SOV
-				has_completed_focus = SOV_Introduce_The_Sixth_Five_Years_Plan
-				NOT = {
-					has_completed_focus = SOV_Analyse_the_results_of_the_Seventh_five_years_plan
-					has_idea = five_year_plan
-				}
-			}
-		complete_national_focus = SOV_Analyse_the_results_of_the_Seventh_five_years_plan
-	}
-	if = {
-		limit = {
-				tag = SOV
 				date > 1967.06.01
 				date < 1967.07.01
 				NOT = { has_country_flag = sov_glass }
@@ -2144,29 +1920,18 @@ ic_pulse = {
 	if = {
 		limit = {
 			tag = SOV
-			date > 1984.2.1
-			date < 1984.4.1
-			has_country_leader = { name = "Yuri Andropov" ruling_only = yes }
+			date > 1982.11.01
+			date < 1982.12.15
 		}
-		country_event = soviet_leader_change.6
+		country_event = sov_death.1
 	}
 	if = {
 		limit = {
 			tag = SOV
-			date > 1985.1.1
-			date < 1985.3.1
-			has_country_flag = Chernenko
+			date > 1984.2.1
+			date < 1984.4.1
 		}
-		country_event = soviet_leader_change.7
-	}
-	if = {
-		limit = {
-			tag = FIN
-			date > 1957.6.1
-			date < 1957.7.1
-			has_country_flag = kekkonen56
-		}
-		country_event = fin.38
+		country_event = sov_death.3
 	}
 	if = {
 		limit = {
@@ -2216,54 +1981,19 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			tag = PDG
-			date > 1967.05.05
-			date < 1967.06.06
-			NOT = { has_country_flag = KKE_8th_Congress }
-			NOT = {
-				has_government = maoism
-			}
-		}
-		complete_national_focus = PDG_60s_The_Fall_of_Khrushchev
-		set_country_flag = KKE_8th_Congress
-	}
-	if = {
-		limit = {
 			tag = SRT
 			date > 1963.06.03
-			date < 1963.07.04
+			date < 1963.06.04
 			NOT = { has_country_flag = Hikmet_Death }
 		}
-		complete_national_focus = SRT_60s_The_Death_of_Nazim_Hikmet
+		complete_national_focus = SRT_General_Secritary_Husnu_Steps_Down
 		set_country_flag = Hikmet_Death
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Collective Leadership"
-			picture = "Council.dds"
-			ideology = marxism_leninism
-		}
-	}
-	if = {
-		limit = {
-			tag = KRD
-			date > 1965.06.03
-			date < 1965.07.04
-			NOT = { has_country_flag = Tofiq_Death }
-		}
-		complete_national_focus = KRD_60s_Khrushchevs_Fall_From_Grace
-		set_country_flag = Tofiq_Death
-		retire_country_leader = yes
-		create_country_leader = {
-			name = "Collective Leadership"
-			picture = "Council.dds"
-			ideology = marxism_leninism
-		}
 	}
 	if = {
 		limit = {
 			tag = POL
 			date > 1961.12.03
-			date < 1962.01.04
+			date < 1961.12.04
 			NOT = { has_country_flag = POL_assassination_attempt }
 		}
 		complete_national_focus = POL_60s_Trouble_in_the_Sosnowiek
@@ -2273,7 +2003,7 @@ ic_pulse = {
 		limit = {
 			tag = YUG
 			date > 1963.07.26
-			date < 1963.08.27
+			date < 1963.07.27
 			NOT = { has_country_flag = Skopje_earthquake }
 		}
 		complete_national_focus = YUG_60s_The_Skopje_Earthquake
@@ -2283,7 +2013,7 @@ ic_pulse = {
 		limit = {
 			tag = YUG
 			date > 1959.10.21
-			date < 1959.11.22
+			date < 1959.10.22
 			NOT = { has_idea = Economic_Recession5 }
 		}
 		add_ideas = Economic_Recession5
@@ -2370,21 +2100,11 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			tag = USA
-			date > 1951.06.01
-			date < 1951.07.01
-			has_global_flag = korean_war
-		}
-		country_event = MacArthur_Dismissal.2
-	}
-	if = {
-		limit = {
-			tag = SOV
-			date > 1969.01.01
-			date < 1969.02.01
-			NOT = { has_country_flag = sov_brez_assasin }
-			has_country_leader = { name = "Leonid Brezhnev" ruling_only = yes }
-		}
+				tag = SOV
+				date > 1969.01.01
+				date < 1969.02.01
+				NOT = { has_country_flag = sov_brez_assasin }
+			}
 		news_event = sov.101
 		set_country_flag = sov_brez_assasin
 	}
@@ -2489,86 +2209,6 @@ ic_pulse = {
 			date < 1951.11.01
 		}
 		country_event = Cambodia_Elections.1
-	}
-	if = {
-		limit = {
-			KRD = {
-				has_country_flag = IRAQ_KRD_WAR
-				has_completed_focus = KRD_60s_Nassar_Refuses
-				NOT = {
-					has_country_flag = KRD_Iraq_Victory
-				}
-			}
-			KUR = {
-				controls_state = 291
-				controls_state = 676
-			}
-		}
-		KUR = {
-			white_peace = IRQ
-		}
-		KRD = {
-			set_country_flag = KRD_Iraq_Victory
-			annex_country = {
-				target = KUR
-				transfer_troops = yes
-			}
-			transfer_state = 676
-			transfer_state = 941
-			transfer_state = 811
-			941 = {
-				add_core_of = KRD
-				remove_core_of = IRQ
-			}
-		}
-	}
-	if = {
-		limit = {
-			KRD = {
-				has_country_flag = IRAQ_KRD_WAR
-				has_completed_focus = KRD_60s_Nassar_Accepts
-				NOT = {
-					has_country_flag = KRD_UAR_iraq_victory
-				}
-			}
-			IRQ = {
-				NOT = {
-					controls_state = 291
-					controls_state = 676
-					controls_state = 675
-				}
-			}
-		}
-		KUR = {
-			white_peace = IRQ
-		}
-		EGY = {
-			white_peace = IRQ
-		}
-		KRD = {
-			set_country_flag = KRD_UAR_iraq_victory
-			annex_country = {
-				target = KUR
-				transfer_troops = yes
-			}
-			transfer_state = 676
-			transfer_state = 941
-			transfer_state = 811
-			941 = {
-				add_core_of = KRD
-				remove_core_of = IRQ
-			}
-		}
-		IRQ = {
-			every_owned_state = {
-				add_core_of = EGY
-			}
-		}
-		EGY = {
-			annex_country = {
-				target = IRQ
-			}
-		}
 	}
 	if = {
 		limit = {
@@ -2691,7 +2331,7 @@ ic_pulse = {
 		}
 		news_event = cultural_events.1
 		set_country_flag = cultural_events_one
-	}
+	} 		
 	if = {
 		limit = {
 			tag = USA
@@ -2811,6 +2451,14 @@ ic_pulse = {
 			mao_funeral_super_event = yes
 			set_country_flag = Mao_Dead
 		news_event = PRC_Focus.10
+	}
+	if = {
+		limit = {
+			tag = DDR
+			date > 1953.06.01
+			date < 1953.08.01
+		}
+		country_event = cwu.1
 	}
 	if = {
 		limit = {
@@ -3255,7 +2903,7 @@ ic_pulse = {
 			id = 11481
 			name = "Karl-Marx-Stadt"
 		}
-		news_event = marx_year.1
+		news_event = marx_year.1 
 	}
 	if = {
 		limit = {
@@ -3494,7 +3142,7 @@ ic_pulse = {
 			NOT = { tag = PRC }
 			NOT = { tag = POL }
 			NOT = { tag = SOM }
-			#NOT = { tag = TUR }
+			NOT = { tag = TUR }
 			NOT = { tag = KOR }
 			NOT = { tag = YUG }
 			NOT = { tag = KPA }
@@ -3520,7 +3168,6 @@ ic_pulse = {
 			NOT = { tag = NGA }
 			NOT = { tag = RAJ }
 			NOT = { tag = PAK }
-			NOT = { tag = FIN }
 		}
 		load_focus_tree = generic_focus_60
 		set_country_flag = focus_tree_60_reset
@@ -3578,8 +3225,7 @@ ic_pulse = {
 				tag = WGR
 				tag = EGY
 				tag = SOM
-				tag = FIN
-				tag = NIC
+				tag = FRA
 			}
 		}
 		set_country_flag = focus_tree_60_reset
@@ -3596,12 +3242,6 @@ ic_pulse = {
 		#	load_focus_tree = SOR_1960s
 		#}
 		if = {
-			limit ={
-				tag = GRE
-			}
-			load_focus_tree = GRE_60s
-		}
-		if = {
 			limit = {
 				tag = PDG
 			}
@@ -3617,7 +3257,7 @@ ic_pulse = {
 			limit = {
 				tag = POL
 			}
-			load_focus_tree = POL_60s
+			load_focus_tree = 60s_POL
 		}
 		if = {
 			limit = {
@@ -3625,17 +3265,17 @@ ic_pulse = {
 			}
 			load_focus_tree = BUL_60s
 		}
-		# if = {
-			# limit = {
-				# tag = CZE
-			# }
-			# load_focus_tree = CZE_60s
-		# }
+		if = {
+			limit = {
+				tag = CZE
+			}
+			load_focus_tree = 60s_CZE
+		}
 		if = {
 			limit = {
 				tag = YUG
 			}
-			load_focus_tree = YUG_60s
+			load_focus_tree = 60s_YUG
 		}
 		if = {
 			limit = {
@@ -3648,20 +3288,6 @@ ic_pulse = {
 				tag = DDR
 			}
 			load_focus_tree = GDR_1960s
-		}
-		if = {
-			limit = {
-				tag = FRA
-				has_government = communism
-			}
-			load_focus_tree = FRA_1960s_Maoist
-		}
-		if = {
-			limit = {
-				tag = FRA
-				has_government = maoism
-			}
-			load_focus_tree = FRA_1960s_Maoist
 		}
 		if = {
 			limit = {
@@ -3689,7 +3315,7 @@ ic_pulse = {
 					has_government = communism
 				}
 			}
-			load_focus_tree = PAK_Ayub_Start_60s
+			load_focus_tree = 60s_PAK_Ayub_Start
 		}
 		if = {
 			limit = {
@@ -3698,27 +3324,6 @@ ic_pulse = {
 			}
 			load_focus_tree = generic_focus_60
 			set_country_flag = focus_tree_60_reset
-		}
-		if = {
-			limit = {
-				tag = NIC
-				NOT = {
-					has_government = communism
-					has_government = maoism
-				}
-			}
-				load_focus_tree = generic_focus_60
-			set_country_flag = focus_tree_60_reset
-		}
-		if = {
-			limit = {
-				tag = NIC
-				OR = {
-					has_government = communism
-					has_government = maoism
-				}
-			}
-			load_focus_tree = 60s_NIC_COM
 		}
 		if = {
 			limit = {
@@ -3742,13 +3347,13 @@ ic_pulse = {
 			limit = {
 				tag = SRT
 			}
-			load_focus_tree = SRT_60s
+			load_focus_tree = 60s_SRT
 		}
 		if = {
 			limit = {
 				tag = KRD
 			}
-			load_focus_tree = KRD_60s
+			load_focus_tree = 60s_KRD
 		}
 		if = {
 			limit = {
@@ -3759,25 +3364,8 @@ ic_pulse = {
 		if = {
 			limit = {
 				tag = EGY
-				has_country_leader = {
-					name = "Gamal Abdel Nasser"
-					ruling_only = yes
-				}
 			}
 			load_focus_tree = UAR_60s
-		}
-		if = {
-			limit = {
-				tag = EGY
-				NOT = {
-					has_country_leader = {
-						name = "Gamal Abdel Nasser"
-						ruling_only = yes
-					}
-				}
-			}
-			load_focus_tree = generic_focus_60
-			set_country_flag = focus_tree_60_reset
 		}
 		if = {
 			limit = {
@@ -3789,13 +3377,13 @@ ic_pulse = {
 			limit = {
 				tag = SYR
 			}
-			load_focus_tree = SYR_60s
+			load_focus_tree = 60s_SYR
 		}
 		if = {
 			limit = {
 				tag = ZIM
 			}
-			load_focus_tree = ZIM_60s
+			load_focus_tree = 60s_ZIM
 		}
 		if = {
 			limit = {
@@ -3850,7 +3438,7 @@ ic_pulse = {
 			limit = {
 				tag = GHA
 			}
-			load_focus_tree = GHA_60s
+			load_focus_tree = 60s_GHA
 		}
 		if = {
 			limit = {
@@ -3863,12 +3451,6 @@ ic_pulse = {
 				tag = PER
 			}
 			load_focus_tree = IRAN_1960s
-		}
-		if = {
-			limit = {
-				tag = FIN
-			}
-			load_focus_tree = FIN_60s
 		}
 		if = {
 			limit = {
@@ -3914,7 +3496,7 @@ ic_pulse = {
 			tag = PRC
 			date > 1969.12.31
 			date < 1970.05.15
-			NOT = {
+			NOT = { 
 				has_country_flag = focus_tree_73_reset
 			}
 		}
@@ -3975,7 +3557,7 @@ ic_pulse = {
 			date < 1973.01.31
 			NOT = { has_country_flag = focus_tree_73_reset }
 		}
-		load_focus_tree = { tree = MLA_70s keep_completed = yes }
+		load_focus_tree = MLA_70s
 		set_country_flag = focus_tree_73_reset
 	}
 	if = {
@@ -4061,7 +3643,7 @@ ic_pulse = {
 			date < 1952.04.01
 		}
 		country_event = iran_elections.1952
-	}
+	}	
 	
 	if = {
 		limit = {
@@ -4098,11 +3680,18 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			tag = FIN
-			date > 1965.07.01
-			date < 1965.08.15
+			tag = USA
+			date > 1961.06.01
+			date < 1961.08.01
+			NOT = { has_country_flag = Jupiter_Missiles_Turkey }
+			NOT = { SRT = { has_government = communism } }
+			NOT = { SRT = { has_government = maoism } }
+			NOT = { TUR = { has_government = communism } }
+			NOT = { TUR = { has_government = trotskyism } }
+			NOT = { TUR = { has_government = maoism } }
 		}
-		country_event = fin.47
+		set_country_flag = Jupiter_Missiles_Turkey
+		news_event = cubamc.1
 	}
 	if = {
 		limit = {
@@ -4607,16 +4196,15 @@ ic_pulse = {
 			date < 1953.10.06
 			NOT = { has_global_flag = stalin_dead }
 		}
-		country_event = soviet_leader_change.1
+		country_event = swf.4
 	}
 	if = {
 		limit = {
 			tag = SOV
-			date > 1982.03.01
-			date < 1982.04.01
-			has_country_leader = { name = "Leonid Brezhnev" ruling_only = yes }
+			date > 1964.10.01
+			date < 1964.12.31
 		}
-		country_event = soviet_leader_change.3
+		country_event = sov.6
 	}
 	if = {
 		limit = {
@@ -4987,6 +4575,7 @@ ic_pulse = {
 			NOT = {
 				has_war_with = KOR
 				has_war_with = KPA
+				has_global_flag = asian_liberation_war
 			}
 		}
 		remove_ideas = korean_war
@@ -4995,24 +4584,10 @@ ic_pulse = {
 		PRC = { dismantle_faction = yes }
 		KPA = { dismantle_faction = yes }
 		KOR = { dismantle_faction = yes }
-		if = {
-			limit = {
-				PRC = {
-					has_country_flag = PRC_SOV
-				}
-			}
-			SOV = {
-				set_autonomy = {
-					target = PRC
-					autonomy_state = autonomy_easternbloc
-				}
-			}
-		}
 	}
 	if = {
 		limit = {
 			tag = FRA
-			owns_state = 459
 			date > 1954.10.01
 			date < 1955.01.01
 			NOT = { has_country_flag = ALGERIA_WAR_START }
@@ -5331,7 +4906,7 @@ ic_pulse = {
 			ideology = communism
 			portrait = GFX_Kim_il_Sung_70s
 		}
-	}
+	}	
 	if = {
 		limit = {
 			original_tag = KPA
@@ -5343,7 +4918,7 @@ ic_pulse = {
 			ideology = communism
 			portrait = GFX_Kim_il_Sung_80s
 		}
-	}
+	}	
 	if = {
 		limit = {
 			original_tag = SPR
@@ -5355,7 +4930,7 @@ ic_pulse = {
 			ideology = fascism
 			portrait = GFX_Older_Franco
 		}
-	}
+	}	
 	if = {
 		limit = {
 			original_tag = POR
@@ -5367,7 +4942,7 @@ ic_pulse = {
 			ideology = fascism
 			portrait = GFX_Older_Salazar
 		}
-	}
+	}	
 	
 	if = {
 		limit = {
@@ -5402,7 +4977,7 @@ ic_pulse = {
 			ideology = communism
 			portrait = GFX_Fidel_Castro_70s
 		}
-	}
+	}	
 	if = {
 		limit = {
 			tag = USA
@@ -5741,6 +5316,14 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
+			tag = SOV
+			date > 1955.05.01	#14
+			date < 1955.08.20
+		}
+		country_event = { id = swf.7 days = 10 random = 1 }
+	}
+	if = {
+		limit = {
 			tag = PAR
 			date > 1954.05.01
 			date < 1954.06.01
@@ -5770,7 +5353,7 @@ ic_pulse = {
 			date > 1957.05.01
 			date < 1957.06.01
 		}
-		country_event = DOM_ELECTS.1
+		country_event = DOM_ELECTS.1 
 	}
 	if = {
 		limit = {
@@ -5843,7 +5426,7 @@ ic_pulse = {
 			date < 1954.07.01
 		}
 		country_event = TUR_1950_ELECTIONS.3
-	}
+	}	
 	if = {
 		limit = {
 			tag = TUR
@@ -5872,7 +5455,7 @@ ic_pulse = {
 		limit = {
 			tag = FIN
 			date > 1953.01.01
-			date < 1953.02.01
+			date < 1953.01.27
 		}
 		news_event = fin.7
 	}
@@ -5961,20 +5544,16 @@ ic_pulse = {
 				tag = FRA
 				date > 1961.04.01
 				date < 1961.05.30
-				NOT = {
-					has_government = communism
-				}
 			}
 		country_event = algeirs.2
 	}
 	if = {
 		limit = {
-			tag = NIC
-			date > 1968.02.01
-			date < 1968.05.31
-			has_government = maoism
+			tag = FRA
+			date > 1958.01.01
+			date < 1959.02.01
 		}
-		country_event = nicc.17
+		country_event = fra_crisis.1
 	}
 	if = {
 		limit = {
@@ -6008,7 +5587,6 @@ ic_pulse = {
 			tag = BRM
 			date > 1962.03.01
 			date < 1962.06.01
-			BRM = { has_unit_leader = 17118 }
 		}
 		country_event = burma.1
 	}
@@ -6048,7 +5626,7 @@ ic_pulse = {
 		limit = {
 			tag = FRA
 			date > 1968.04.28
-			date < 1968.05.28
+			date < 1968.05.02
 			has_completed_focus = FRA_60s_Re_Elect_De_Galle
 		}
 		news_event = may.681
@@ -6057,7 +5635,7 @@ ic_pulse = {
 		limit = {
 			tag = FRA
 			date > 1968.04.28
-			date < 1968.05.28
+			date < 1968.05.02
 			has_completed_focus = FRA_60s_Re_Elect_De_Galle
 		}
 		news_event = may.682
@@ -6091,7 +5669,7 @@ ic_pulse = {
 	if = {
 		limit = {
 			tag = DDR
-			date > 1975.12.5
+			date > 1972.07.31
 		}
 		country_event = { id = ddr.39 days = 14 random = 1 }
 	}
@@ -6125,13 +5703,13 @@ ic_pulse = {
 			tag = HAS
 			NGA = {
 				has_country_flag = hausaland_war
-			}
+			}	
 			check_variable = {
 				global.province_controllers^2050 = HAS.id
 			}
 		}
 		white_peace = NGA
-		#news_event =
+		#news_event = 
 		NGA = {
 			clr_country_flag = hausaland_war
 		}
@@ -6151,7 +5729,7 @@ ic_pulse = {
 		news_event = BFR.104
 		NGA = {
 			clr_country_flag = biafra_war
-		}
+		}		
 	}
 	if = {
 		limit = {
@@ -6207,6 +5785,33 @@ ic_pulse = {
 			NOT = { YUG = { has_country_flag = tito_dead } }
 		}
 		country_event = yug.3
+	}
+	if = {
+		limit = {
+			VIN = {
+				has_war_with = FRA
+				NOT = { owns_state = 786 }
+				OR = {
+					date > 1954.07.19
+					AND = {
+						controls_state = 881
+						controls_state = 786
+						controls_state = 838
+						controls_state = 671
+					}
+				}
+			}
+		}
+		country_event = vie.1
+	}
+	if = {
+		limit = {
+			VIN = {
+				NOT = { controls_state = 881 }
+				has_war_with = FRA
+			}
+		}
+		country_event = vie.7
 	}
 	if = {
 		limit = {
@@ -6357,9 +5962,6 @@ ic_pulse = {
 			date > 1961.05.29
 			date < 1961.06.02
 			tag = FRA
-			NOT = {
-				has_government = communism
-			}
 		}
 		news_event = fra_news.31
 	}
@@ -6376,9 +5978,6 @@ ic_pulse = {
 			date > 1960.02.01
 			date < 1960.02.09
 			tag = FRA
-			NOT = {
-				has_government = communism
-			}
 		}
 		news_event = fra_news.3
 	}
@@ -6395,9 +5994,6 @@ ic_pulse = {
 			date > 1960.01.25
 			date < 1960.02.02
 			tag = FRA
-			NOT = {
-				has_government = communism
-			}
 		}
 		news_event = fra_news.5
 	}
@@ -6406,7 +6002,6 @@ ic_pulse = {
 			date > 1960.03.01
 			date < 1960.03.05
 			tag = FRA
-			NOT = { has_government = communism }
 		}
 		news_event = fra_news.8
 	}
@@ -6415,7 +6010,6 @@ ic_pulse = {
 			date > 1960.03.10
 			date < 1960.03.23
 			tag = FRA
-			NOT = { has_government = communism }
 		}
 		news_event = fra_news.9
 	}
@@ -6424,7 +6018,6 @@ ic_pulse = {
 			date > 1960.04.03
 			date < 1960.04.10
 			tag = FRA
-			NOT = { has_government = communism }
 		}
 		news_event = fra_news.10
 	}
@@ -6461,7 +6054,7 @@ ic_pulse = {
 					55 = {
 						#log = "[THIS.Owner.GetTag]:[THIS.GetName]: no effect"
 					}
-					30 = {
+					30 = { 
 						#log = "[THIS.Owner.GetTag]:[THIS.GetName]: infra -1"
 						remove_building = { type = infrastructure level = 1 } }
 					5 = {
@@ -6961,9 +6554,7 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			any_subject_country = {
-				owns_state = 816
-			}
+			original_tag = FRA
 			date > 1959.12.31
 			date < 1961.03.01
 		}
@@ -6979,9 +6570,7 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			any_subject_country = {
-				owns_state = 761
-			}
+			original_tag = FRA
 			date > 1960.04.26
 			date < 1961.01.01
 		}
@@ -7117,8 +6706,8 @@ ic_pulse = {
 	if = {
 		limit = {
 			tag = AFG
-			date > 1973.08.01
-			date < 1973.10.01
+			date > 1961.08.01
+			date < 1961.10.01
 			NOT = { has_country_flag = AFG_NEWS_RESIGN }
 		}
 		set_country_flag = AFG_NEWS_RESIGN
@@ -7237,13 +6826,8 @@ ic_pulse = {
 				has_full_control_of_state = 448
 				has_full_control_of_state = 661
 			}
-			OR = {
-				FRA = {
-					has_full_control_of_state = 775
-				}
-				LBA = {
-					has_full_control_of_state = 775
-				}
+			FRA = {
+				has_full_control_of_state = 775
 			}
 		}
 		country_event = decolonization.37
@@ -7551,14 +7135,6 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			original_tag = NIC
-			date > 1959.06.01
-			date < 1959.08.01
-		}
-		country_event = nic.17
-	}
-	if = {
-		limit = {
 			original_tag = PAK
 			date > 1958.02.01
 			date < 1958.04.01
@@ -7582,15 +7158,12 @@ ic_pulse = {
 				has_global_flag = Islamabad_Opened
 			}
 		}
-		1592 = {
+		440 = {
 			set_state_name = "Islamabad"
 			set_victory_points = {
 				province = 8022
 				value = 20
 			}
-		}
-		PAK = {
-			set_capital = { state = 440 }
 		}
 		set_global_flag = Islamabad_Opened
 		news_event = Islamabad.3
@@ -7621,7 +7194,6 @@ ic_pulse = {
 			date < 1966.01.01
 		}
 		country_event = PM_Shastri.1
-		set_country_flag = Shastri_Tashkent
 	}
 	if = {
 		limit = {
@@ -7678,6 +7250,19 @@ ic_pulse = {
 
 		}
 		country_event = chinese_civil_war.1
+	}
+	if = {
+		limit = {
+			original_tag = HOL
+			country_exists = INS
+			INS = { is_subject_of = HOL }
+			has_war_with = INO
+			OR = {
+				date > 1949.11.01
+				INS = { has_capitulated = yes }
+			}
+		}
+		country_event = indonesia.1
 	}
 	if = {
 		limit = {
@@ -7785,69 +7370,56 @@ ic_pulse = {
 	}
 
 	if = {
-		limit = {
-			tag = GRE
-			date > 1951.9.9
-			date < 1952.1.1
-			NOT = { has_government = neutrality }
-			NOT = { has_government = monarchism }
-			NOT = { has_government = communism }
-			NOT = { has_government = maoism }
-		}
-		country_event = { id = GRE_Elections.1 days = 1 }
-	}
-
-	if = {
-		limit = {
-			tag = GRE
-			date > 1952.11.15
-			date < 1953.1.1
-			NOT = { has_government = neutrality }
-			NOT = { has_government = monarchism }
-			NOT = { has_government = communism }
-			NOT = { has_government = maoism }
-		}
-		country_event = { id = GRE_Elections.2 days = 1 }
-	}
-
-	if = {
-		limit = {
-			original_tag = GRE
-			date > 1955.10.1
-			date < 1955.11.30
-			has_country_leader = {
-				name = "Alexandros Papagos"
-				ruling_only = yes
+				limit = {
+					tag = GRE
+					date > 1951.9.9
+					date < 1952.1.1
+					NOT = { has_government = neutrality }
+					NOT = { has_government = monarchism }
+					NOT = { has_government = communism }
+					NOT = { has_government = maoism }
+				}
+				country_event = { id = GRE_Elections.1 days = 1 }
 			}
-		}
-		country_event = greece.6
-	}
 
 	if = {
-		limit = {
-			tag = GRE
-			date > 1956.2.18
-			date < 1957.1.1
-			NOT = { has_government = neutrality }
-			NOT = { has_government = monarchism }
-			NOT = { has_government = communism }
-			NOT = { has_government = maoism }
-		}
-		country_event = { id = GRE_Elections.3 days = 1 }
-	}
+				limit = {
+					tag = GRE
+					date > 1952.11.15
+					date < 1953.1.1
+					NOT = { has_government = neutrality }
+					NOT = { has_government = monarchism }
+					NOT = { has_government = communism }
+					NOT = { has_government = maoism }
+				}
+				country_event = { id = GRE_Elections.2 days = 1 }
+			}
 
 	if = {
-		limit = {
-			tag = GRE
-			date > 1958.5.11
-			date < 1959.1.1
-			NOT = { has_government = neutrality }
-			NOT = { has_government = monarchism }
-			NOT = { has_government = communism }
-			NOT = { has_government = maoism }
-		}
-		country_event = { id = GRE_Elections.4 days = 1 }
-	}
+				limit = {
+					tag = GRE
+					date > 1956.2.18
+					date < 1957.1.1
+					NOT = { has_government = neutrality }
+					NOT = { has_government = monarchism }
+					NOT = { has_government = communism }
+					NOT = { has_government = maoism }
+				}
+				country_event = { id = GRE_Elections.3 days = 1 }
+			}
+
+	if = {
+				limit = {
+					tag = GRE
+					date > 1958.5.11
+					date < 1959.1.1
+					NOT = { has_government = neutrality }
+					NOT = { has_government = monarchism }
+					NOT = { has_government = communism }
+					NOT = { has_government = maoism }
+				}
+				country_event = { id = GRE_Elections.4 days = 1 }
+			}
 
 	if = {
 		limit = {
@@ -8039,6 +7611,24 @@ ic_pulse = {
 			date < 1970.12.31
 		}
 		country_event = { id = Golpe_Borghese.1 days = 0 }
+	}
+	if = {
+		limit = {
+			tag = EGY
+			date > 1951.10.1
+			date < 1951.12.25
+		}
+		country_event = suez.0
+	}
+	if = {
+		limit = {
+			tag = EGY
+			date > 1956.07.1
+			date < 1956.08.2
+		}
+		country_event = suez.2
+		BAH = { country_event = Suez_Crisis_Gulf.50 }
+		QAT = { country_event = QAT_Suez_Crisis.1 }
 	}
 	if = {
 		limit = {
@@ -8814,25 +8404,10 @@ ic_pulse = {
 			date < 1956.12.1
 			tag = MOR
 			MOR = {
-				OR = {
-					is_subject_of = FRA
-					is_subject_of = ENG
-				}
+				is_subject_of = FRA
 			}
 		}
 		country_event = decolonization.55
-	}
-	#Tunisia independence if france goes red
-	if = {
-		limit = {
-			date > 1956.11.1
-			date < 1956.12.1
-			tag = TUN
-			TUN = {
-				is_subject_of = ENG
-			}
-		}
-		country_event = decolonization.58
 	}
 	#kenya general flavor
 	if = {
@@ -9013,7 +8588,7 @@ ic_pulse = {
 			has_war_with = NGA
 			1011 = {
 				is_fully_controlled_by = BFR
-			}
+			}			
 		}
 		country_event = BFR.105
 	}
@@ -9027,7 +8602,7 @@ ic_pulse = {
 			}
 			1403 = {
 				is_fully_controlled_by = BFR
-			}
+			}			
 		}
 		country_event = BFR.103
 	}
@@ -9108,9 +8683,9 @@ ic_pulse = {
 		limit = {
 			tag = NGA
 			has_war_with = BFR
-			check_variable = {
-				global.province_controllers^14329 = NGA.id
-			}
+            check_variable = {
+                global.province_controllers^14329 = NGA.id
+            }
 		}
 		country_event = nga60.39
 	}
@@ -9185,9 +8760,6 @@ ic_pulse = {
 			date > 1968.5.1
 			FRA = {
 				has_focus_tree = FRA_1960s_Maoist
-				NOT = {
-					has_completed_focus = FRA_SOV_60s_The_May_68_Coup
-				}
 			}
 		}
 		FRA = {
@@ -9208,19 +8780,13 @@ ic_pulse = {
 	if = {
 		limit = {
 			date > 1968.01.13
-			date < 1968.02.14
+			date < 1968.01.14
 			tag = ADR
 			NOT = { has_country_flag = Death_of_Koplenig }
 		}
 		ADR = {
 			set_country_flag = Death_of_Koplenig
 			complete_national_focus = ADR_60s_The_Death_of_Koplenig
-			retire_country_leader = yes
-			create_country_leader = {
-				name = "Collective Leadership"
-				picture = "Council.dds"
-				ideology = marxism_leninism
-			}
 		}
 	}
 	if = {
@@ -9266,367 +8832,15 @@ ic_pulse = {
 	}
 	if = {
 		limit = {
-			tag = SPR
-			date > 1973.6.01
-			date < 1973.7.01
-			has_ideology	 = falangism 
+			OR = {
+				tag = HOL
+				tag = INO
+				tag = INS
+			}
+			owns_state = 668
+			date > 1950.4.1
+			date < 1950.5.1
 		}
-		country_event = Spa_end_franco.1
-	}
-	if = {
-		limit = {
-			tag = SPR
-			date > 1973.12.01
-			date < 1974.1.01
-			has_ideology	 = falangism 
-		}
-		country_event = Spa_end_franco.2
-	}
-	if = {
-		limit = {
-			tag = SPR
-			date > 1975.11.01
-			date < 1975.12.01
-			has_ideology = falangism 
-		}
-		country_event = Spa_end_franco.3
-	}
-	if = {
-		limit = {
-			tag = SPR
-			date > 1977.6.01
-			date < 1977.7.01
-		}
-		country_event = Spa_end_franco.4
-	}
-
-#asian liberation war
-	if = {
-		limit = {
-			CHI = {
-				surrender_progress > 0.10
-				has_global_flag = asian_liberation_war
-				controls_state = 604
-				not = {
-					has_country_flag = XSM_Revolt
-				}
-			}
-		}
-		PRC = {
-			news_event = PRC_SOV.33
-		}
-		CHI = {
-			set_country_flag = XSM_revolt
-			}
-			XSM = {
-				create_country_leader = {
-					name = "Muhemmet'imin Iminof"
-					picture = "General_Muhemmet'imin_Iminof‎.dds"
-					ideology = stalinism
-				}
-				set_cosmetic_tag = XSM_Revolt
-				transfer_state = 604
-				add_state_core = 604
-				country_event = resource.1250
-				on_independence_run = yes
-				set_politics = {
-					ruling_party = communism
-				}
-				declare_war_on = {
-					target = CHI
-					type = annex_everything
-				}
-			add_popularity = {
-				ideology = communism
-				popularity = 1
-			}
-			load_oob = "generic_insurgency"
-			capital_scope = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-			}
-			random_owned_state = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-			}
-			random_owned_state = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = XSM
-				}
-			}
-		}
-		PRC = {
-			add_to_faction = XSM
-		}
-	}
-	if = {
-		limit = {
-			has_global_flag = asian_liberation_war
-			AND = {
-				PRC = {
-					controls_state = 613
-					NOT = {
-						has_country_flag = second_battle_of_shanghai
-					}
-				}
-			}
-		}
-		news_event = PRC_SOV.44
-		PRC = {
-			set_country_flag = second_battle_of_shanghai
-			add_timed_idea = {
-				idea = VIN_peoples_army
-				days = 500
-			}
-		}
-	}
-	if = {
-		limit = {
-			has_global_flag = asian_liberation_war
-			AND = {
-				PRC = {
-					controls_province = 4619
-					NOT = {
-						has_country_flag = battle_of_Wuhan
-					}
-				}
-			}
-		}
-		PRC = {
-			set_country_flag = battle_of_Wuhan
-			news_event = PRC_SOV.45
-		}
-		CHI = {
-			add_ideas = Defeatism
-		}
-	}
-	if = {
-		limit = {
-			has_global_flag = asian_liberation_war
-			AND = {
-				CHI = {
-					controls_province = 9843
-					NOT = {
-						has_country_flag = Fall_of_Beijing
-					}
-				}
-			}
-		}
-		news_event = PRC_SOV.46
-		CHI = {
-			set_country_flag = Fall_of_Beijing
-			add_ideas = Defeatism
-		}
-	}
-	if = {
-		limit = {
-			CHI = {
-				surrender_progress > 0.50
-				controls_state = 1569
-				has_global_flag = asian_liberation_war
-				not = {
-					has_country_flag = GXC_Revolt
-				}
-			}
-		}
-		news_event = PRC_SOV.34
-		CHI = {
-			set_country_flag = GXC_revolt
-				
-			}
-		GXC = {
-			create_country_leader = {
-				name = "Peng Dehuai"
-				picture = "Peng_Dehuai.dds"
-				ideology = stalinism
-			}
-			set_cosmetic_tag = GXC_Revolt
-			transfer_state = 1569
-			add_state_core = 1569
-			country_event = resource.1250
-			on_independence_run = yes
-			declare_war_on = {
-				target = CHI
-				type = annex_everything
-			}
-			set_politics = {
-				ruling_party = communism
-			}
-			add_popularity = {
-				ideology = communism
-				popularity = 1
-			}
-			load_oob = "generic_insurgency"
-			capital_scope = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-			}
-			random_owned_state = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-			}
-			random_owned_state = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = GXC
-				}
-			}
-		}
-		PRC = {
-			add_to_faction = GXC
-		}
-	}
-	if = {
-		limit = {
-			CHI = {
-				surrender_progress > 0.75
-				controls_state = 325
-				has_global_flag = asian_liberation_war
-				not = {
-					has_country_flag = YUN_Revolt
-				}
-			}
-		}
-		SIA = {
-			add_timed_idea = {
-				idea = volunteer_corps_focus
-				days = 2500
-			}
-			add_ai_strategy = {
-				type = send_volunteers_desire
-				id = CHI
-				value = 4000
-			}
-		}
-			news_event = PRC_SOV.35
-		CHI = {
-			set_country_flag = YUN_revolt
-			}
-		YUN = {
-			create_country_leader = {
-				name = "Kai Feng"
-				picture = "Kai_Feng.dds"
-				ideology = stalinism
-			}
-			set_cosmetic_tag = YUN_Revolt
-			transfer_state = 325
-			add_state_core = 325
-			country_event = resource.1250
-			on_independence_run = yes
-			declare_war_on = {
-				target = CHI
-				type = annex_everything
-			}
-			set_politics = {
-				ruling_party = communism
-			}
-			add_popularity = {
-				ideology = communism
-				popularity = 1
-			}
-			load_oob = "generic_insurgency"
-			capital_scope = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-			}
-			random_owned_state = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-			}
-			random_owned_state = {
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-				create_unit = {
-					division = "name = \"Infantry Division\" division_template = \"Infantry Division\" start_experience_factor = 0.75 start_equipment_factor = 0.5"
-					owner = YUN
-				}
-			}
-		}
-		PRC = {
-			add_to_faction = YUN
-		}
+		country_event = smk.1
 	}
 }
